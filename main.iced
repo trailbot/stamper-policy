@@ -1,12 +1,17 @@
 fs = require 'fs'
+path = require 'path'
+mkdirp = require 'mkdirp'
 Stampery = require 'stampery'
 
 class Stamper
   constructor : (params) ->
     @file = params.path
+    @proofsDir = params.proofsDir
+    await mkdirp "#{@proofsDir}#{@file}", defer err
 
     @stampery = new Stampery params.secret
     @stampery.on 'proof', @proofStore
+    @stampery.on 'ready', @stampery.receiveMissedProofs
 
   receiver : =>
     stream = fs.createReadStream @file
@@ -14,7 +19,7 @@ class Stamper
     @stampery.stamp digest
 
   proofStore : (hash, proof) =>
-    proofFile = path.resolve "#{@file}.proof"
+    proofFile = path.resolve "#{@proofsDir}#{@file}.proof"
     line = "#{new Date()}\t#{hash}\t{JSON.stringify proof}"
     try
       fs.appendFile proofFile, line
