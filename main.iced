@@ -7,7 +7,10 @@ class Stamper
   constructor : (params) ->
     @file = params.path
     @proofsDir = params.proofsDir
-    await mkdirp path.resolve("#{@proofsDir}#{@file.split('/').slice(0, -1).join('/')}"), defer err
+    @fileName = @file.split('/').pop()
+    @path = path.resolve "#{@proofsDir}/#{@file.split('/').slice(0, -1).join('/')}"
+    console.log "Proof path will be #{@path}"
+    await mkdirp @path, defer err
 
     @stampery = new Stampery params.secret
     @stampery.on 'proof', @proofStore
@@ -19,8 +22,9 @@ class Stamper
     @stampery.stamp digest
 
   proofStore : (hash, proof) =>
-    proofFile = path.resolve "#{@proofsDir}#{@file}.proof"
-    line = "#{new Date()}\t#{hash}\t{JSON.stringify proof}"
+    proofFile = path.resolve "#{@path}/#{@fileName}.proof"
+    console.log "Storing proof as #{proofFile}"
+    line = "#{new Date()}\t#{hash}\t#{JSON.stringify proof}\n"
     try
       fs.appendFile proofFile, line
     catch e
