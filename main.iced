@@ -7,7 +7,7 @@ class Stamper
   constructor : (params) ->
     @file = params.path
     @proofsDir = params.proofsDir
-    await mkdirp "#{@proofsDir}#{@file}", defer err
+    await mkdirp path.resolve("#{@proofsDir}#{@file.split('/').slice(0, -1).join('/')}"), defer err
 
     @stampery = new Stampery params.secret
     @stampery.on 'proof', @proofStore
