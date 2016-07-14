@@ -1,0 +1,16 @@
+{
+  "name": "policy-stamper",
+  "version": "0.0.1",
+  "dependencies": {
+    "stampery": "^3.1.2"
+  },
+  "policy": {
+    "language": "icedcoffeescript",
+    "params": {
+      "secret": {
+        "type": "text",
+        "label": "Stampery client secret"
+      }
+    }
+  }
+}
