@@ -3,19 +3,24 @@
   "version": "0.0.1",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "stampery": "^3.1.2"
+    "stampery": "^3.2.0"
   },
   "policy": {
     "language": "icedcoffeescript",
     "params": {
       "secret": {
         "type": "text",
-        "label": "Stampery client secret"
+        "required": true,
+        "label": "Stampery API token",
+        "tip": "Your Stampery API secret token. Mail us at nestor@stampery.com for requesting one."
       },
       "proofsDir": {
         "type": "text",
-        "label": "Proofs output directory"
+        "required": true,
+        "label": "Proofs output directory",
+        "tip": "The path of the folder in the server where you want to store the proofs."
       }
-    }
+    },
+    "defaultName": "Blockchain timestamp"
   }
 }

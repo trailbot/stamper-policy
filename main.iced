@@ -9,7 +9,7 @@ class Stamper
     @proofsDir = params.proofsDir
     @fileName = @file.split('/').pop()
     @path = path.resolve "#{@proofsDir}/#{@file.split('/').slice(0, -1).join('/')}"
-    console.log "Proof path will be #{@path}"
+    console.log "[POLICY][STAMPER] Proof path will be #{@path}"
     await mkdirp @path, defer err
 
     @stampery = new Stampery params.secret
@@ -23,7 +23,7 @@ class Stamper
 
   proofStore : (hash, proof) =>
     proofFile = path.resolve "#{@path}/#{@fileName}.proof"
-    console.log "Storing proof as #{proofFile}"
+    console.log "[POLICY][STAMPER]  Storing proof as #{proofFile}"
     line = "#{new Date()}\t#{hash}\t#{JSON.stringify proof}\n"
     try
       fs.appendFile proofFile, line
