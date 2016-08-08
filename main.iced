@@ -16,15 +16,14 @@ class Stamper
     @stampery.on 'proof', @proofStore
     @stampery.on 'ready', @stampery.receiveMissedProofs
 
-  receiver : =>
-    stream = fs.createReadStream @file
-    await @stampery.hash stream, defer digest
+  receiver : ({cur}) =>
+    await @stampery.hash cur.content, defer digest
     @stampery.stamp digest
 
   proofStore : (hash, proof) =>
-    proofFile = path.resolve "#{@path}/#{@fileName}.proof"
+    proofFile = path.resolve "#{@path}/#{@fileName}.csv"
     console.log "Storing proof as #{proofFile}"
-    line = "#{new Date()}\t#{hash}\t#{JSON.stringify proof}\n"
+    line = "#{new Date()};t#{hash};t#{JSON.stringify proof}\n"
     try
       fs.appendFile proofFile, line
     catch e
