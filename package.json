@@ -1,6 +1,6 @@
 {
-  "name": "policy-stamper",
-  "version": "0.2.1",
+  "name": "stamper-policy",
+  "version": "0.2.2",
   "dependencies": {
     "mkdirp": "^0.5.1",
     "stampery": "^3.4.0"
