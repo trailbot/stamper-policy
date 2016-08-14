@@ -1,10 +1,11 @@
 {
   "name": "policy-stamper",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "mkdirp": "^0.5.1",
-    "stampery": "^3.2.0"
+    "stampery": "^3.4.0"
   },
+  "repository": "https://github.com/trailbot/stamper-policy",
   "policy": {
     "language": "icedcoffeescript",
     "params": {
