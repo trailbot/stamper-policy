@@ -13,7 +13,7 @@
         "type": "text",
         "required": true,
         "label": "Stampery API token",
-        "tip": "Your Stampery API secret token. Mail us at nestor@stampery.com for requesting one."
+        "tip": "Your Stampery API secret token. Sign up at http://api-dashboard.stampery.com."
       },
       "proofsDir": {
         "type": "text",
